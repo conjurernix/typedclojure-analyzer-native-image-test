@@ -1,0 +1,14 @@
+{:paths   ["src"]
+ :deps    {org.typedclojure/typed.clj.analyzer {:mvn/version "1.2.1"}}
+ :aliases {:native-image
+           {:main-opts ["-m" "clj.native-image" "typedclojure-analyzer-native-image-test.core"
+                        "--initialize-at-build-time"
+                        ; Testing with and without the fallback option
+                        "--no-fallback"
+                        ;; optional native image name override
+                        "-H:Name=core"]
+            :jvm-opts  ["-Dclojure.compiler.direct-linking=true"]
+            :extra-deps
+            {clj.native-image/clj.native-image
+             {:git/url "https://github.com/taylorwood/clj.native-image.git"
+              :sha     "7708e7fd4572459c81f6a6b8e44c96f41cdd92d4"}}}}}
